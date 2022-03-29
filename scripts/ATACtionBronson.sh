@@ -148,19 +148,19 @@ for filename in *_bwa.bam
 do
   base=`basename $filename _bwa.bam`
   echo "convert sam to bam & filter for MAPQ > 40 & sort bam"
-  samtools view -@ $CPU -S -b -q 40 ${base}_bwa.bam > ${base}_bwa_mapq40.bam
-  samtools sort -@ $CPU -o ${base}_bwa_mapq40_sorted.bam ${base}_bwa_mapq40.bam
+  samtools view -@ 12 -S -b -q 40 ${base}_bwa.bam > ${base}_bwa_mapq40.bam
+  samtools sort -@ 12 -o ${base}_bwa_mapq40_sorted.bam ${base}_bwa_mapq40.bam
   echo " index sorted bam files"
-  samtools index -@ $CPU -b ${base}_bwa_mapq40_sorted.bam ${base}_bwa_mapq40_sorted.bam.bai
+  samtools index -@ 12 -b ${base}_bwa_mapq40_sorted.bam ${base}_bwa_mapq40_sorted.bam.bai
   echo "remove mtDNA reads"
-  samtools view -@ $CPU -b ${base}_bwa_mapq40_sorted.bam chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 \
+  samtools view -@ 12 -b ${base}_bwa_mapq40_sorted.bam chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 \
   chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22 chrX chrY > ${base}_bwa_no_chrM.bam
   echo "Index no_ChrM files"
-  samtools index -@ $CPU -b ${base}_bwa_no_chrM.bam  ${base}_bwa_no_chrM.bam.bai
+  samtools index -@ 12 -b ${base}_bwa_no_chrM.bam  ${base}_bwa_no_chrM.bam.bai
   echo "remove blacklisted regions"
-  samtools view -@ $CPU -b -L /data/hodges_lab/hg38_genome/hg38.blacklist.bed \
+  samtools view -@ 12 -b -L /data/hodges_lab/hg38_genome/hg38.blacklist.bed \
   -U ${base}_bwa_filtered.unsorted.bam ${base}_bwa_no_chrM.bam > ${base}_bwa_blacklisted.bam
-  samtools sort -@ $CPU ${base}_bwa_filtered.unsorted.bam > ${FILT_DIR}/${base}_bwa_filtered.bam
+  samtools sort -@ 12 ${base}_bwa_filtered.unsorted.bam > ${FILT_DIR}/${base}_bwa_filtered.bam
   echo "Index filtered files"
-  samtools index -@ $CPU -b ${FILT_DIR}/${base}_bwa_filtered.bam ${FILT_DIR}/${base}.filtered.bam.bai
+  samtools index -@ 12 -b ${FILT_DIR}/${base}_bwa_filtered.bam ${FILT_DIR}/${base}.filtered.bam.bai
 done
