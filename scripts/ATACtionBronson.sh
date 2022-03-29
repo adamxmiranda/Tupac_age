@@ -164,3 +164,17 @@ do
   echo "Index filtered files"
   samtools index -@ 12 -b ${FILT_DIR}/${base}_bwa_filtered.bam ${FILT_DIR}/${base}.filtered.bam.bai
 done
+
+#remove sequencing duplicates
+module load picard/2.18.27
+cd ${FILT_DIR}
+PICARD="$EBROOTPICARD/picard.jar"
+for filename in *_filtered.bam
+do
+  echo "removing sequencing duplicates"
+  echo ${filename}
+  base=`basename $filename _filtered.bam`
+  java -jar $PICARD MarkDuplicates I=${base}_filtered.bam O=${base}.unique.bam \
+  M=${base}_marked_dup_metrics-all.txt REMOVE_DUPLICATES=TRUE
+  echo "dupes removed"
+done
