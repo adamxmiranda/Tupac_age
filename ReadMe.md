@@ -12,7 +12,8 @@ This function contains all of the necessary steps to go from .fastq to featureCo
 Make your analysis a little less Tricky!
 Tricky, Tricky, Tricky
 
-This wrapper makes use of functions from
+This wrapper makes use of functions from:
+
 [TrimGalore] (https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/)
 [SAMtools] (http://www.htslib.org/)
 [STAR] (https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf)
