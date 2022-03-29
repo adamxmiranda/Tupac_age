@@ -43,7 +43,13 @@ done
 
 # Print variables
 echo "path = $path"
+if [ -z "$path" ]; then
+   echo "Path does not exist"
+   exit; 
+ else
+   echo "Path exists"
 
+fi
 #create subdirectories for staged outputs
 if [ ! -d "$path/raw_reads" ]; then
   mkdir $path/raw_reads
