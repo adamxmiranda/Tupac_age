@@ -30,7 +30,7 @@ if [ -z "$1" ] || [[ $1 == -h ]] || [[ $1 == --help ]]; then
 	exit
 fi
 #ARGUMENT parsing function from Stackexchange
-#shout our JRichardsz
+#shout out JRichardsz
 for ARGUMENT in "$@"
 do
    KEY=$(echo $ARGUMENT | cut -f1 -d=)
@@ -45,7 +45,7 @@ done
 echo "path = $path"
 if [ -z "$path" ]; then
    echo "Path does not exist"
-   exit; 
+   exit;
  else
    echo "Path exists"
 
