@@ -1,5 +1,5 @@
 # Tupac_age
-! [Logo](https://github.com/adamxmiranda/Tupac_age/blob/'progress'/logo/Tupac_age-logo.svg?raw=true)
+![Logo](https://github.com/adamxmiranda/Tupac_age/blob/'progress'/logo/Tupac_age-logo.svg?raw=true)
 This is the Kendrick La_markdown of the Tu-pac-age of wRapper functions to automate my work for me. Herein will be many rap-centric puns to make the tedium of writing this much more tolerable.
 
 These functions are personalized for use on Vanderbilt's ACCRE cluster. Efforts to generalize this for wider use likely won't happen.
