@@ -4,4 +4,18 @@ output: html_document
 runtime: shiny
 ---
 
-Where'd you go? I miss you so
+I'll be missing you
+
+ ```{r include = FALSE}
+ #load libraries
+ library("tidyverse")
+ library("DESeq2")
+ library("ggplot2")
+ #library("hexbin")
+ #library("apeglm")
+ library("genefilter")
+ library("pheatmap")
+ library("cluster")
+ #library("factoextra")
+ library("RColorBrewer")
+ ```
