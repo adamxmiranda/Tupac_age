@@ -6,16 +6,20 @@ runtime: shiny
 
 I'll be missing you
 
- ```{r include = FALSE}
- #load libraries
- library("tidyverse")
- library("DESeq2")
- library("ggplot2")
- #library("hexbin")
- #library("apeglm")
- library("genefilter")
- library("pheatmap")
- library("cluster")
- #library("factoextra")
- library("RColorBrewer")
- ```
+```{r load-packages, include = FALSE}
+#load libraries
+library("tidyverse")
+library("DESeq2")
+library("ggplot2")
+#library("hexbin")
+#library("apeglm")
+library("genefilter")
+library("pheatmap")
+library("cluster")
+#library("factoextra")
+library("RColorBrewer")
+library("shinythemes")
+library("shiny")
+```
+
+```
