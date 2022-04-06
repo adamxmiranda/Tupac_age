@@ -4,7 +4,7 @@ output:
   prettydoc::html_pretty:
     theme: hpstr
     toc: true
-
+    number_sections: true
 runtime: shiny
 ---
 
