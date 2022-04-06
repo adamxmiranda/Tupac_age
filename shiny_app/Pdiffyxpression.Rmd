@@ -1,6 +1,10 @@
 ---
 title: "Pdiffyxpression: A wRapper app for determining differential gene expression"
-output: html_document
+output:
+  prettydoc::html_pretty:
+    theme: hpstr
+    toc: true
+
 runtime: shiny
 ---
 
@@ -21,7 +25,7 @@ library("RColorBrewer")
 library("shinythemes")
 library("shiny")
 ```
-## Input your files for DESeq2
+# Input your files for DESeq2
 
 Input the file containing info for your samples. This should be a tab-separated file containing the colData for DESeq2.
 
