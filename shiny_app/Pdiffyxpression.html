@@ -368,6 +368,43 @@ determining differential gene expression</h1>
 
 
 <p>I’ll be missing you</p>
+<div id="section-input-your-files-for-deseq2" class="section level2">
+<h2>Input your files for DESeq2</h2>
+<p>Input the file containing info for your samples. This should be a
+tab-separated file containing the colData for DESeq2.</p>
+<div class="form-group shiny-input-container">
+<label class="control-label" id="sample_info-label" for="sample_info">Sample Info File</label>
+<div class="input-group">
+<label class="input-group-btn input-group-prepend">
+<span class="btn btn-default btn-file">
+Browse...
+<input id="sample_info" name="sample_info" type="file" style="position: absolute !important; top: -99999px !important; left: -99999px !important;"></input>
+</span>
+</label>
+<input type="text" class="form-control" placeholder="No file selected" readonly="readonly"></input>
+</div>
+<div id="sample_info_progress" class="progress active shiny-file-input-progress">
+<div class="progress-bar"></div>
+</div>
+</div>
+<p>Input your read Count file. This should ideally be the output from
+RNA_DMC.</p>
+<div class="form-group shiny-input-container">
+<label class="control-label" id="counts_file-label" for="counts_file">Count file from RNA_DMC</label>
+<div class="input-group">
+<label class="input-group-btn input-group-prepend">
+<span class="btn btn-default btn-file">
+Browse...
+<input id="counts_file" name="counts_file" type="file" style="position: absolute !important; top: -99999px !important; left: -99999px !important;"></input>
+</span>
+</label>
+<input type="text" class="form-control" placeholder="No file selected" readonly="readonly"></input>
+</div>
+<div id="counts_file_progress" class="progress active shiny-file-input-progress">
+<div class="progress-bar"></div>
+</div>
+</div>
+</div>
 
 
 

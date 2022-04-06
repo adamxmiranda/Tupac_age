@@ -21,5 +21,18 @@ library("RColorBrewer")
 library("shinythemes")
 library("shiny")
 ```
+## Input your files for DESeq2
 
+Input the file containing info for your samples. This should be a tab-separated file containing the colData for DESeq2.
+
+```{r sample_info-file-input, echo = FALSE}
+fileInput(inputId = "sample_info",
+          label = "Sample Info File")
+```
+
+Input your read Count file. This should ideally be the output from RNA_DMC.
+
+```{r count-file-input, echo = FALSE}
+fileInput(inputId = "counts_file",
+          label = "Count file from RNA_DMC")
 ```
