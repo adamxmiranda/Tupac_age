@@ -1,0 +1,11 @@
+name: shiny_app
+title:
+username:
+account: adamxmiranda
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6040457
+bundleId: 5775379
+url: https://adamxmiranda.shinyapps.io/shiny_app/
+when: 1649356461.21107
+lastSyncTime: 1649356461.21108
