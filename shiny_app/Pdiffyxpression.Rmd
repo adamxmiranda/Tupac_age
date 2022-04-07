@@ -34,38 +34,34 @@ library("knitr")
 Input the file containing info for your samples. This should be a tab-separated file containing the colData for DESeq2.
 
 ```{r sample_info-file-input, echo = FALSE}
-textInput(inputId = "sample_info",
+fileInput(inputId = "sample_info",
           label = "URL or path to Sample Info File")
 ```
 
 Input your read Count file. This should ideally be the output from RNA_DMC.
 
 ```{r count-file-input, echo = FALSE}
-textInput(inputId = "counts_file",
+fileInput(inputId = "counts_file",
           label = "URL or path Count file from RNA_DMC")
 ```
+```{r ls}
+observe({
+  print( input$sample_info )
+  print( input$counts_file )
+})
+```
 
-```{r read-inputfiles, echo = FALSE}
+```{r read-inputfiles, echo = FALSE, results = 'asis'}
 if ( !exists("input") ){
-  knit_print("No files uploaded")
-} else {
-  str(input)
-}
+  cat("No files uploaded")
+} #else {
+  #str(input)
+#}
 if ( !exists("input$sample_info") ){
-  knit_print("No Sample Info File")
-} else {
-  col_data <- read_tsv(file = input$sample_info)
-  str(col_data)
+  cat("No Sample Info File")
 }
 if ( !exists("input$counts_file") ){
-  knit_print("No Count File")
-} #else {
-#   read.delim(file = input$counts_file, skip = 1,
-#                                 col.names = c("geneID", "Chr", "Start", "End", "Strand", "Length", "R702R_KO_6F_rep2", "R702R_KO_6G_rep1", "R702R_KO_6G_rep2", "K700E_TWT1_rep1", "K700E_TWT1_rep2", "K700E_TWT2_rep1", "K700E_TWT2_rep2", "K700E_KO_1H_rep1", "K700E_KO_1H_rep2", "K700E_KO_3A_rep1", "R702R_TWT1_rep1", "K700E_KO_3A_rep2", "K700E_KO_3B_rep1", "K700E_KO_3B_rep2", "K700E_KO_6B_rep1", "K700E_KO_6B_rep2", "R702R_TWT1_rep2", "R702R_TWT2_rep1", "R702R_TWT2_rep2", "R702R_KO_2E_rep1", "R702R_KO_2E_rep2", "R702R_KO_5F_rep1", "R702R_KO_5F_rep2", "R702R_KO_6F_rep1"),
-#                                 row.names = "geneID") %>%
-#   dplyr::select("R702R_KO_6F_rep2", "R702R_KO_6G_rep1", "R702R_KO_6G_rep2", "K700E_TWT1_rep1", "K700E_TWT1_rep2", "K700E_TWT2_rep1", "K700E_TWT2_rep2", "K700E_KO_1H_rep1", "K700E_KO_1H_rep2", "K700E_KO_3A_rep1", "R702R_TWT1_rep1", "K700E_KO_3A_rep2", "K700E_KO_3B_rep1", "K700E_KO_3B_rep2", "K700E_KO_6B_rep1", "K700E_KO_6B_rep2", "R702R_TWT1_rep2", "R702R_TWT2_rep1", "R702R_TWT2_rep2", "R702R_KO_2E_rep1", "R702R_KO_2E_rep2", "R702R_KO_5F_rep1", "R702R_KO_5F_rep2", "R702R_KO_6F_rep1")
-#
-# }
-
+  cat("No Count File")
+}
 ```
 ## Read files
