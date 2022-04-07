@@ -24,6 +24,7 @@ library("cluster")
 library("RColorBrewer")
 library("shinythemes")
 library("shiny")
+library("knitr")
 ```
 # Input your files for DESeq2
 
@@ -39,4 +40,17 @@ Input your read Count file. This should ideally be the output from RNA_DMC.
 ```{r count-file-input, echo = FALSE}
 fileInput(inputId = "counts_file",
           label = "Count file from RNA_DMC")
+```
+
+```{r read-inputfiles, echo = FALSE}
+if ( !exists("input") ){
+  knit_print("No files uploaded")
+}
+if ( !exists("input$sample_info") ){
+  knit_print("No Sample Info File")
+}
+if ( !exists("input$counts_file") ){
+  knit_print("No Count File")
+}
+
 ```
