@@ -51,20 +51,11 @@ counts_file_df <- reactive(as.data.frame(read_tsv(file = counts_file_func())))
 counts_file_df
 ```
 
-```{r ls}
-input
-```
-
 ```{r read-inputfiles, echo = FALSE, results = 'asis'}
-if ( !exists("input") ){
-  cat("No files uploaded")
-} else {
-  exists("input")
-}
-if ( !exists("input$sample_info") ){
+if ( !exists("sample_info_df") ){
   cat("No Sample Info File")
 }
-if ( !exists("input$counts_file") ){
+if ( !exists("counts_file_df") ){
   cat("No Count File")
 }
 ```
