@@ -34,29 +34,30 @@ library("knitr")
 Input the file containing info for your samples. This should be a tab-separated file containing the colData for DESeq2.
 
 ```{r sample_info-file-input, echo = FALSE}
-fileInput(inputId = "sample_info",
+textInput(inputId = "sample_info",
           label = "URL or path to Sample Info File")
+sample_info_func <- reactive(input$sample_info)
+sample_info_df <- reactive(as.data.frame(read_tsv(file = sample_info_func())))
+sample_info_df
 ```
 
 Input your read Count file. This should ideally be the output from RNA_DMC.
 
 ```{r count-file-input, echo = FALSE}
-fileInput(inputId = "counts_file",
+textInput(inputId = "counts_file",
           label = "URL or path Count file from RNA_DMC")
 ```
+
 ```{r ls}
-observe({
-  print( input$sample_info )
-  print( input$counts_file )
-})
+input
 ```
 
 ```{r read-inputfiles, echo = FALSE, results = 'asis'}
 if ( !exists("input") ){
   cat("No files uploaded")
-} #else {
-  #str(input)
-#}
+} else {
+  exists("input")
+}
 if ( !exists("input$sample_info") ){
   cat("No Sample Info File")
 }
@@ -64,4 +65,6 @@ if ( !exists("input$counts_file") ){
   cat("No Count File")
 }
 ```
+
+
 ## Read files
