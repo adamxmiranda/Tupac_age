@@ -47,7 +47,9 @@ Input your read Count file. This should ideally be the output from RNA_DMC.
 textInput(inputId = "counts_file",
           label = "URL or path Count file from RNA_DMC")
 counts_file_func <- reactive(input$counts_file)
-counts_file_df <- reactive(as.data.frame(read_tsv(file = counts_file_func())))
+counts_file_df <- reactive(as.data.frame(read.delim(file = counts_file_func(),
+                                         skip = 1,
+                                         col.names = c("geneID", "Chr", "Start", "End", "Strand", "Length", sample_info_df$row_names))))
 counts_file_df
 ```
 
