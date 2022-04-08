@@ -34,11 +34,16 @@ library("knitr")
 Input the file containing info for your samples. This should be a tab-separated file containing the colData for DESeq2.
 
 ```{r sample_info-file-input, echo = FALSE}
+rvs <- reactiveValues()
 textInput(inputId = "sample_info",
-          label = "URL or path to Sample Info File")
+          label = "Path to Sample Info File")
 sample_info_func <- reactive(input$sample_info)
-sample_info_df <- reactive(as.data.frame(read_tsv(file = sample_info_func())))
-sample_info_df
+rvs$sample_info_df <- reactive(as.data.frame(read_tsv(file = sample_info_func())))
+isolate(rvs$sample_info_df)
+rvs$sample_names <- reactive(as.vector(read_tsv(file = sample_info_func(),
+                                                cols_only([,1])
+                                                )))
+isolate(rvs$sample_names)
 ```
 
 Input your read Count file. This should ideally be the output from RNA_DMC.
@@ -47,7 +52,7 @@ Input your read Count file. This should ideally be the output from RNA_DMC.
 textInput(inputId = "counts_file",
           label = "URL or path Count file from RNA_DMC")
 counts_file_func <- reactive(input$counts_file)
-counts_file_df <- reactive(as.data.frame(read.delim(file = counts_file_func(),
+rvs$counts_file_df <- reactive(as.data.frame(read.delim(file = counts_file_func(),
                                          skip = 1,
                                          col.names = c("geneID", "Chr", "Start", "End", "Strand", "Length",
                                                        reactive(sample_info_df$rowname)
