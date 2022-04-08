@@ -49,7 +49,9 @@ textInput(inputId = "counts_file",
 counts_file_func <- reactive(input$counts_file)
 counts_file_df <- reactive(as.data.frame(read.delim(file = counts_file_func(),
                                          skip = 1,
-                                         col.names = c("geneID", "Chr", "Start", "End", "Strand", "Length", sample_info_df$row_names))))
+                                         col.names = c("geneID", "Chr", "Start", "End", "Strand", "Length", 
+                                                       reactive(sample_info_df$rowname)hello my baby
+                                                       ))))
 counts_file_df
 ```
 
