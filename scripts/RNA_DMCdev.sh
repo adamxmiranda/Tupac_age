@@ -126,7 +126,7 @@ do
   base=$(basename $filename R1_001_val_1.fq.gz)
   echo ${base}
   STAR --runMode alignReads \
-  --runThreadN 8 \
+  --runThreadN 12 \
   --genomeDir ${INDEX} \
   --readFilesCommand zcat \
   --readFilesIn ${base}${TRIM_SUFF_1} ${base}${TRIM_SUFF_2} \
@@ -154,5 +154,5 @@ cd ${FILT_DIR}
 featureCounts -F GTF -a /data/park_lab/STAR_index/gtf/genes.gtf \
               -G /data/park_lab/STAR_index/fasta/genome.fa \
               -o ${COUNT_DIR}/feature_counts/featureCounts_all_samples.txt \
-              -T 8 -p --countReadPairs \
+              -T 12 -p \
               -O -t exon ${FILT_DIR}/*.bam

@@ -18,6 +18,11 @@ A build of the Subread package in your .bashrc
 I use
 /subread-2.0.0-Linux-x86_64/bin
 
+Make sure the fastq files have the suffix _001.fastq.gz.
+
+If you get a segmentation error increase the number of threads.
+This current version calls for 12.
+
 Parameters:
 path=/path/to/fastq/files         Specify the path to the fastq files. This wRapper
                                   will create multiple subdirectories within this
@@ -126,7 +131,7 @@ do
   base=$(basename $filename R1_001_val_1.fq.gz)
   echo ${base}
   STAR --runMode alignReads \
-  --runThreadN 8 \
+  --runThreadN 12 \
   --genomeDir ${INDEX} \
   --readFilesCommand zcat \
   --readFilesIn ${base}${TRIM_SUFF_1} ${base}${TRIM_SUFF_2} \
@@ -154,5 +159,5 @@ cd ${FILT_DIR}
 featureCounts -F GTF -a /data/park_lab/STAR_index/gtf/genes.gtf \
               -G /data/park_lab/STAR_index/fasta/genome.fa \
               -o ${COUNT_DIR}/feature_counts/featureCounts_all_samples.txt \
-              -T 8 -p --countReadPairs \
+              -T 12 -p --countReadPairs \
               -O -t exon ${FILT_DIR}/*.bam
