@@ -95,19 +95,19 @@ cd $path/raw_reads
 module load GCC/5.4.0-2.26
 module load cutadapt/1.9.1-Python-3.5.2
 module load FastQC/0.11.9
-SUFF_1="R1_001.fastq.gz"
-SUFF_2="R2_001.fastq.gz"
-for filename in *R1_001.fastq.gz
-do
-  echo "begin trimming ${filename}"
-  base=$(basename $filename R1_001.fastq.gz)
-  echo ${base}
-  trim_galore --fastqc --fastqc_args "--outdir ${FASTQC_DIR}" \
-  --paired --retain_unpaired \
-  --output_dir ${TRIM_DIR} \
-  ${base}${SUFF_1} ${base}${SUFF_2}
-  echo "end trimming ${base}"
-done
+# SUFF_1="R1_001.fastq.gz"
+# SUFF_2="R2_001.fastq.gz"
+# for filename in *R1_001.fastq.gz
+# do
+#   echo "begin trimming ${filename}"
+#   base=$(basename $filename R1_001.fastq.gz)
+#   echo ${base}
+#   trim_galore --fastqc --fastqc_args "--outdir ${FASTQC_DIR}" \
+#   --paired --retain_unpaired \
+#   --output_dir ${TRIM_DIR} \
+#   ${base}${SUFF_1} ${base}${SUFF_2}
+#   echo "end trimming ${base}"
+# done
 
 # Loop to perform mapping
 #load modules
