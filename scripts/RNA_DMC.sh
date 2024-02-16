@@ -139,10 +139,10 @@ done
 module load GCC/5.4.0-2.26
 module load SAMtools/1.5
 cd ${MAP_DIR}
-for filename in *S1_L005_.samAligned.out.sam
+for filename in *.samAligned.out.sam
 do
   echo ${filename}
-  base=$(basename $filename S1_L005_.samAligned.out.sam)
+  base=$(basename $filename .samAligned.out.sam)
   echo $base
   echo "${filename}: convert sam to bam & filter for MAPQ > 30 & sort bam"
   samtools view -@ 8 -S -b -q 30 ${filename} | samtools sort -@ 8 -n -o ${FILT_DIR}/${base}.bam
