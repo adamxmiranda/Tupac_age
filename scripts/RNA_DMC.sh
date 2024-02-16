@@ -56,7 +56,7 @@ if [ ! -d "$path/raw_reads" ]; then
 else
   echo "$path/raw_reads already exists"
 fi
-mv $path/*.fastq $path/raw_reads
+mv $path/*.fastq.gz $path/raw_reads
 if [ ! -d "$path/trimmed_reads" ]; then
   mkdir $path/trimmed_reads
 else
