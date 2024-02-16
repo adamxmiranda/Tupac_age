@@ -116,8 +116,8 @@ module load STAR/2.5.4b
 #hg38 index on park_lab
 INDEX="/data/park_lab/STAR_index"
 #suffixes for trimmed files
-TRIM_SUFF_1="R1_001_val_1.fq.gz"
-TRIM_SUFF_2="R2_001_val_2.fq.gz"
+TRIM_SUFF_1="R1_001_trimmed.fq.gz"
+TRIM_SUFF_2="R2_001_trimmed.fq.gz"
 cd ${TRIM_DIR}
 #mapping loop for trimmed reads created in the first loop
 for filename in ${MAP_DIR}/*${SUFF_1}
