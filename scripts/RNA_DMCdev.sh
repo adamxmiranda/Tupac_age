@@ -50,7 +50,7 @@ if [ -z "$path" ]; then
    echo "Path exists"
 
 fi
-#create subdirectories for staged outputs
+# #create subdirectories for staged outputs
 if [ ! -d "$path/raw_reads" ]; then
   mkdir $path/raw_reads
 else
@@ -87,27 +87,27 @@ else
   echo "$path/counts_file already exists"
 fi
 COUNT_DIR="$path/counts_file"
-# Loop to perform trimming and quality control
-# Loop only works for files named with the same convention as what VANTAGE uses
+Loop to perform trimming and quality control
+Loop only works for files named with the same convention as what VANTAGE uses
 #change to the raw reads directory
 cd $path/raw_reads
 #load the modules for this step
 module load GCC/5.4.0-2.26
 module load cutadapt/1.9.1-Python-3.5.2
 module load FastQC/0.11.9
-# SUFF_1="R1_001.fastq.gz"
-# SUFF_2="R2_001.fastq.gz"
-# for filename in *R1_001.fastq.gz
-# do
-#   echo "begin trimming ${filename}"
-#   base=$(basename $filename R1_001.fastq.gz)
-#   echo ${base}
-#   trim_galore --fastqc --fastqc_args "--outdir ${FASTQC_DIR}" \
-#   --paired --retain_unpaired \
-#   --output_dir ${TRIM_DIR} \
-#   ${base}${SUFF_1} ${base}${SUFF_2}
-#   echo "end trimming ${base}"
-# done
+SUFF_1="R1_001.fastq.gz"
+SUFF_2="R2_001.fastq.gz"
+for filename in *R1_001.fastq.gz
+do
+  echo "begin trimming ${filename}"
+  base=$(basename $filename R1_001.fastq.gz)
+  echo ${base}
+  trim_galore --fastqc --fastqc_args "--outdir ${FASTQC_DIR}" \
+  --paired --retain_unpaired \
+  --output_dir ${TRIM_DIR} \
+  ${base}${SUFF_1} ${base}${SUFF_2}
+  echo "end trimming ${base}"
+done
 
 # Loop to perform mapping
 #load modules
@@ -115,12 +115,16 @@ module load GCC/6.4.0-2.28
 module load STAR/2.5.4b
 #hg38 index on park_lab
 INDEX="/data/park_lab/STAR_index"
+TRIM_DIR="$path/trimmed_reads"
+MAP_DIR="$path/mapped_reads"
+FILT_DIR="$path/filtered_reads"
+COUNT_DIR="$path/counts_file"
 #suffixes for trimmed files
 TRIM_SUFF_1="R1_001_val_1.fq.gz"
 TRIM_SUFF_2="R2_001_val_2.fq.gz"
 cd ${TRIM_DIR}
 #mapping loop for trimmed reads created in the first loop
-for filename in ${MAP_DIR}/*${SUFF_1}
+for filename in ${TRIM_DIR}/*${TRIM_SUFF_1}
 do
   echo "mapping ${filename}"
   base=$(basename $filename R1_001_val_1.fq.gz)
@@ -139,7 +143,7 @@ done
 module load GCC/5.4.0-2.26
 module load SAMtools/1.5
 cd ${MAP_DIR}
-for filename in *.samAligned.out.sam
+for filename in ${MAP_DIR}/*.samAligned.out.sam
 do
   echo ${filename}
   base=$(basename $filename .samAligned.out.sam)
@@ -153,6 +157,6 @@ done
 cd ${FILT_DIR}
 featureCounts -F GTF -a /data/park_lab/STAR_index/gtf/genes.gtf \
               -G /data/park_lab/STAR_index/fasta/genome.fa \
-              -o ${COUNT_DIR}/feature_counts/featureCounts_all_samples.txt \
+              -o ${COUNT_DIR}/featureCounts_all_samples.txt \
               -T 12 -p \
               -O -t exon ${FILT_DIR}/*.bam
