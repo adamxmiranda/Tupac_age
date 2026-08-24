@@ -160,12 +160,25 @@ do
   samtools view -@ 12 -S -b -q 30 ${filename} | samtools sort -@ 12 -n -o ${FILT_DIR}/${base}.bam
   echo "filtered and sorted ${base}"
 done
-# dedup
+
+#Deduplication of filtered reads
+cd ${FILT_DIR}
+for filename in ${FILT_DIR}/*.bam
+do
+  echo ${filename}
+  base=$(basename $filename .samAligned.out.sam)
+  echo $base
+  echo "${filename}: filter PCR duplicates"
+  picard MarkDuplicates I=${filename} \
+  O=${FILT_DIR}/${base}_deduped.bam \
+  M=${FILT_DIR}/${base}_dedup_metrics.txt \
+  REMOVE_DUPLICATES=true
+done
 
 #Feature Counts
-cd ${FILT_DIR}
+
 featureCounts -F GTF -a /data/park_lab/STAR_index/gtf/genes.gtf \
               -G /data/park_lab/STAR_index/fasta/genome.fa \
               -o ${COUNT_DIR}/featureCounts_all_samples.txt \
               -T 12 -p \
-              -O -t exon ${FILT_DIR}/*.bam
+              -O -t exon ${FILT_DIR}/*_deduped.bam
